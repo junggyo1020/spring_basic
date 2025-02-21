@@ -3,11 +3,14 @@ package hello.core.scan.filter;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import hello.core.member.MemberRepository;
+import hello.core.member.MemoryMemberRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
@@ -33,5 +36,9 @@ public class ComponentFilterAppConfigTest {
     )
     static class ComponentFilterAppConfig {
 
+        @Bean(name = "memoryMemberRepository")
+        public MemberRepository memberRepository() {
+            return new MemoryMemberRepository();
+        }
     }
 }
